@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Pokipokiware</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Pokipokiware</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="paintmaker.html">Paint Maker</a></li>
+                <li><a href="chatbot.html">Chatbot</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Signup</h2>
+        <form id="signup-form">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password (6+ characters)" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p id="error-message" style="color: red;"></p>
+        <p>Already have an account? <a href="login.html">Login here</a>.</p>
+    </main>
+
+    <script type="module">
+        // Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3ECdjokgrjvejnvcCowZdPttzz5kXbac",
+            authDomain: "pokipoki-fb84c.firebaseapp.com",
+            projectId: "pokipoki-fb84c",
+            storageBucket: "pokipoki-fb84c.firebasestorage.app",
+            messagingSenderId: "953760047154",
+            appId: "1:953760047154:web:3e8d4a28856f8f45231c2b",
+            measurementId: "G-ZNRMYD28T2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Signup Form Handling
+        document.getElementById("signup-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Signup successful! Redirecting to login...");
+                    window.location.href = "login.html"; // Redirect to login page
+                })
+                .catch((error) => {
+                    document.getElementById("error-message").textContent = error.message;
+                });
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2025 Pokipokiware. All rights reserved.</p>
+    </footer>
+</body>
+</html>
