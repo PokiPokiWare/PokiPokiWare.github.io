@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Studio - Pokipokiware</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #34495e;
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .toolbar button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toolbar button:hover {
+            background-color: #2980b9;
+        }
+
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        canvas {
+            border: 2px solid #34495e;
+            cursor: crosshair;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #34495e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Paint Studio - Pokipokiware</h1>
+    </header>
+
+    <div class="toolbar">
+        <button onclick="clearCanvas()">Clear</button>
+        <button onclick="changeColor('black')">Black</button>
+        <button onclick="changeColor('red')">Red</button>
+        <button onclick="changeColor('green')">Green</button>
+        <button onclick="changeColor('blue')">Blue</button>
+        <button onclick="changeSize(5)">Small Brush</button>
+        <button onclick="changeSize(10)">Medium Brush</button>
+        <button onclick="changeSize(20)">Large Brush</button>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="paintCanvas" width="800" height="600"></canvas>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pokipokiware. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let painting = false;
+        let currentColor = 'black';
+        let currentSize = 5;
+
+        // Start drawing
+        canvas.addEventListener('mousedown', (e) => {
+            painting = true;
+            draw(e);
+        });
+
+        // Stop drawing
+        canvas.addEventListener('mouseup', () => {
+            painting = false;
+            ctx.beginPath();
+        });
+
+        // Draw on canvas
+        canvas.addEventListener('mousemove', (e) => {
+            if (!painting) return;
+            draw(e);
+        });
+
+        // Draw function
+        function draw(e) {
+            ctx.lineWidth = currentSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = currentColor;
+
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        }
+
+        // Change color
+        function changeColor(color) {
+            currentColor = color;
+        }
+
+        // Change brush size
+        function changeSize(size) {
+            currentSize = size;
+        }
+
+        // Clear the canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
