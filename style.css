@@ -1,42 +1,153 @@
+/* Basic reset for body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    text-align: center;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
 }
 
-header {
-    background: #333;
-    color: white;
-    padding: 1em;
-}
-
+/* Navigation Bar */
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #2c3e50;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+    margin: 10px;
 }
 
 nav ul li a {
-    color: white;
     text-decoration: none;
-    font-size: 18px;
-}
-
-main {
-    margin: 50px;
-}
-
-footer {
-    background: #333;
     color: white;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #3498db;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #34495e;
+    color: white;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+/* User Info Section (for logged-in users) */
+#user-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#user-info img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#user-info p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#user-info button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#user-info button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px); /* Slight "lift" effect on hover */
+}
+
+#user-info button:active {
+    background-color: #e74c3c;
+    transform: translateY(2px); /* Button presses down on click */
+}
+
+/* 404 Page */
+h1 {
+    font-size: 100px;
+    margin-bottom: 20px;
+    color: #e74c3c;
+}
+
+p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+a {
+    font-size: 18px;
+    color: #3498db;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #34495e;
+    color: white;
+}
+
+/* Main content styling */
+main {
+    padding: 40px;
+    text-align: center;
+}
+
+/* Signup and Login Page */
+input[type="text"], input[type="password"], input[type="email"] {
     padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    margin: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
 }
