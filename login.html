@@ -86,7 +86,7 @@
         });
 
         // Google Sign-In Callback
-        window.handleGoogleLogin = function() {
+        window.handleGoogleLogin = function(response) {
             signInWithPopup(auth, provider)
                 .then(() => {
                     alert("Google login successful! Redirecting...");
