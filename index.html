@@ -12,7 +12,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="signup.html">Signup</a></li>
+                <!-- Signup button should be hidden when logged in -->
+                <li id="signup-link"><a href="signup.html">Signup</a></li>
                 <li><a href="paintmaker.html">Paint Maker</a></li>
                 <li><a href="chatbot.html">Chatbot</a></li>
             </ul>
@@ -60,10 +61,12 @@
             const greeting = document.getElementById("greeting");
             const profilePic = document.getElementById("profile-pic");
             const logoutButton = document.getElementById("logout-button");
+            const signupLink = document.getElementById("signup-link");
 
             if (user) {
                 // User is logged in
                 userInfo.style.display = "block"; // Show user info
+                signupLink.style.display = "none"; // Hide signup button
 
                 // Display greeting and profile picture
                 greeting.textContent = `Hello, ${user.displayName || 'User'}!`;
@@ -80,6 +83,7 @@
             } else {
                 // No user is logged in
                 userInfo.style.display = "none"; // Hide user info
+                signupLink.style.display = "block"; // Show signup button
             }
         });
     </script>
