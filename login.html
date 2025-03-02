@@ -22,7 +22,7 @@
 
     <main>
         <h2>Login</h2>
-        
+
         <!-- Email/Password Login Form -->
         <form id="login-form">
             <input type="email" id="email" placeholder="Email" required>
@@ -76,7 +76,7 @@
             const password = document.getElementById("password").value;
 
             signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
+                .then(() => {
                     alert("Login successful! Redirecting...");
                     window.location.href = "index.html"; // Redirect to homepage
                 })
@@ -86,9 +86,9 @@
         });
 
         // Google Sign-In Callback
-        window.handleGoogleLogin = function(response) {
+        window.handleGoogleLogin = function() {
             signInWithPopup(auth, provider)
-                .then((result) => {
+                .then(() => {
                     alert("Google login successful! Redirecting...");
                     window.location.href = "index.html"; // Redirect to homepage
                 })
