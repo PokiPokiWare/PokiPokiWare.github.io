@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokipokiware</title>
+    <title>Home - Pokipokiware</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Pokipokiware</h1>
+        <h1>Welcome to Pokipokiware</h1>
         <nav>
-            <ul id="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signup.html">Signup</a></li>
                 <li><a href="paintmaker.html">Paint Maker</a></li>
                 <li><a href="chatbot.html">Chatbot</a></li>
-                <li id="login-btn"><a href="login.html">Login</a></li>
-                <li id="signup-btn"><a href="signup.html">Signup</a></li>
-                <li id="dashboard-btn" style="display: none;"><a href="dashboard.html">Dashboard</a></li>
-                <li id="logout-btn" style="display: none;"><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
-        <p id="user-greeting" style="display: none;"></p>
     </header>
 
     <main>
-        <h2>Welcome to Pokipokiware</h2>
-        <p>Explore our tools for creativity and interaction.</p>
+        <div id="user-info" style="display: none;">
+            <p id="greeting"></p>
+            <img id="profile-pic" src="" alt="Profile Picture" width="50" height="50">
+            <button id="logout-button">Logout</button>
+        </div>
+        
+        <h2>Homepage Content</h2>
+        <p>Welcome to your dashboard. Here you can create your own virtual world, chat with our chatbot, and more!</p>
     </main>
+
+    <footer>
+        <p>&copy; 2025 Pokipokiware. All rights reserved.</p>
+    </footer>
 
     <script type="module">
         // Firebase SDK
@@ -47,39 +54,34 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Check user login status
+        // Get the user info and display profile icon
         onAuthStateChanged(auth, (user) => {
+            const userInfo = document.getElementById("user-info");
+            const greeting = document.getElementById("greeting");
+            const profilePic = document.getElementById("profile-pic");
+            const logoutButton = document.getElementById("logout-button");
+
             if (user) {
                 // User is logged in
-                document.getElementById("login-btn").style.display = "none";
-                document.getElementById("signup-btn").style.display = "none";
-                document.getElementById("dashboard-btn").style.display = "inline";
-                document.getElementById("logout-btn").style.display = "inline";
-                document.getElementById("user-greeting").style.display = "block";
-                document.getElementById("user-greeting").textContent = `Welcome, ${user.email}!`;
+                userInfo.style.display = "block"; // Show user info
+
+                // Display greeting and profile picture
+                greeting.textContent = `Hello, ${user.displayName || 'User'}!`;
+                profilePic.src = user.photoURL || "default-profile-pic.jpg"; // Default image if no photoURL
+
+                // Logout functionality
+                logoutButton.onclick = () => {
+                    signOut(auth).then(() => {
+                        window.location.href = "index.html"; // Redirect after logout
+                    }).catch((error) => {
+                        console.error("Error logging out:", error);
+                    });
+                };
             } else {
-                // User is not logged in
-                document.getElementById("login-btn").style.display = "inline";
-                document.getElementById("signup-btn").style.display = "inline";
-                document.getElementById("dashboard-btn").style.display = "none";
-                document.getElementById("logout-btn").style.display = "none";
-                document.getElementById("user-greeting").style.display = "none";
+                // No user is logged in
+                userInfo.style.display = "none"; // Hide user info
             }
         });
-
-        // Logout function
-        window.logout = function() {
-            signOut(auth).then(() => {
-                alert("Logged out successfully!");
-                window.location.reload(); // Reload the page to update UI
-            }).catch((error) => {
-                console.error("Logout Error:", error);
-            });
-        };
     </script>
-
-    <footer>
-        <p>&copy; 2025 Pokipokiware. All rights reserved.</p>
-    </footer>
 </body>
 </html>
